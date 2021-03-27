@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server.js",
-    "dev": "node NODE_ENV=development server.js",
+    "start": "node server.js",
+    "dev": "node server.js",
     "nodemon": "nodemon server.js",
     "client": "npm run start --prefix ../client",
     "client:install": "npm install --prefix ../client",

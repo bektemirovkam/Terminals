@@ -25,6 +25,7 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectTerminalsItem } from "../store/ducks/terminals/selectors";
@@ -216,6 +217,10 @@ const EnhancedTableToolbar = (props) => {
     setVisibleSearchField(!visibleSearchField);
   };
 
+  const handlerClickOnRefresh = () => {
+    dispatch(fetchTerminals());
+  };
+
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -276,6 +281,11 @@ const EnhancedTableToolbar = (props) => {
           />
         </form>
       )}
+      <Tooltip title="Обновить" onClick={handlerClickOnRefresh}>
+          <IconButton aria-label="Обновить список">
+            <AutorenewIcon />
+          </IconButton>
+        </Tooltip>
       {numSelected > 0 ? (
         <Tooltip title="Удалить">
           <IconButton aria-label="delete" onClick={handleRemoveItems}>

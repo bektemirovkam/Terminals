@@ -4,9 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.mjs",
-    "nodemon": "nodemon server.mjs"
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "node NODE_ENV=development server.js",
+    "nodemon": "nodemon server.js",
+    "client": "npm run start --prefix ../client",
+    "client:install": "npm install --prefix ../client",
+    "client:build": "npm run build --prefix ../client"
   },
   "author": "",
   "license": "ISC",

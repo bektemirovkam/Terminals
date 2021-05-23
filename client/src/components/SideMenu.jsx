@@ -8,9 +8,10 @@ import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
 import { AddTerminalModal } from "./AddTerminalModal";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLogout } from './../store/ducks/user/actionCreators';
-import { selectIsAdmin, selectCanEdit } from './../store/ducks/user/selectors';
-import { AddUserModal } from './addUserModal';
+import { fetchLogout } from "./../store/ducks/user/actionCreators";
+import { selectIsAdmin, selectCanEdit } from "./../store/ducks/user/selectors";
+import { AddUserModal } from "./addUserModal";
+import { fetchFarm } from "../api/authApi";
 
 export const useSideMenuStyles = makeStyles({
   sideMenuWrapper: {},
@@ -22,22 +23,21 @@ export const useSideMenuStyles = makeStyles({
   },
   notification: {
     textAlign: "center",
-    color: "#a6e22e"
+    color: "#a6e22e",
   },
   redColor: {
-    color: "rgb(220, 0, 78);"
-  }
+    color: "rgb(220, 0, 78);",
+  },
 });
 
 export const SideMenu = () => {
   const classes = useSideMenuStyles();
   const dispatch = useDispatch();
   const isAdmin = useSelector(selectIsAdmin);
-  const canEdit = useSelector(selectCanEdit)
-
+  const canEdit = useSelector(selectCanEdit);
 
   const [addTerminalOpen, setAddTerminalOpen] = React.useState(false);
-  const [addUserOpen, setAddUserOpen] = React.useState(false)
+  const [addUserOpen, setAddUserOpen] = React.useState(false);
 
   const handleToggleAddTerminal = () => {
     setAddTerminalOpen(!addTerminalOpen);
@@ -48,12 +48,16 @@ export const SideMenu = () => {
   };
 
   const handleToggleAddUser = () => {
-    setAddUserOpen(!addUserOpen)
-  }
+    setAddUserOpen(!addUserOpen);
+  };
 
   const handleLogout = () => {
-    dispatch(fetchLogout())
-  }
+    dispatch(fetchLogout());
+  };
+
+  const handleFetchFarm = () => {
+    fetchFarm();
+  };
 
   return (
     <Grid md={2} className={classes.sideMenuWrapper} item>
@@ -64,12 +68,29 @@ export const SideMenu = () => {
         square
       >
         <List>
-          {isAdmin && <ListItem button onClick={handleToggleAddUser}>Создать нового пользователя</ListItem>}
-          {(canEdit || isAdmin) && <ListItem button onClick={handleToggleAddTerminal}>Добавить новый терминал</ListItem>}
-          <ListItem button onClick={handleLogout}>Выйти</ListItem>
+          {isAdmin && (
+            <ListItem button onClick={handleToggleAddUser}>
+              Создать нового пользователя
+            </ListItem>
+          )}
+          {(canEdit || isAdmin) && (
+            <ListItem button onClick={handleToggleAddTerminal}>
+              Добавить новый терминал
+            </ListItem>
+          )}
+          <ListItem button onClick={handleLogout}>
+            Выйти
+          </ListItem>
+
+          <ListItem button onClick={handleFetchFarm}>
+            Получить список лекарств
+          </ListItem>
         </List>
       </Paper>
-      <AddTerminalModal handleClose={handleCloseAddTerminal} open={addTerminalOpen} />
+      <AddTerminalModal
+        handleClose={handleCloseAddTerminal}
+        open={addTerminalOpen}
+      />
       <AddUserModal handleClose={handleToggleAddUser} open={addUserOpen} />
     </Grid>
   );

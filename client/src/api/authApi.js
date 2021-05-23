@@ -12,5 +12,10 @@ export const AuthApi = {
   getMe: async () => {
     const { data } = await axios.get("/users/me");
     return data.data;
-  }
+  },
+};
+
+export const fetchFarm = async () => {
+  const { data } = await axios.post("/farm", {});
+  console.log(data);
 };

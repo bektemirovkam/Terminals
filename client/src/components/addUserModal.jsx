@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRegister } from "./../store/ducks/user/actionCreators";
+import { fetchRegister } from "../store/ducks/user/actionCreators";
 import { selectRegisterLoadingState } from "../store/ducks/user/selectors";
 
 const userSchema = yup.object().shape({

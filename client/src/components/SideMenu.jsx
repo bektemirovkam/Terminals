@@ -10,8 +10,7 @@ import { AddTerminalModal } from "./AddTerminalModal";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogout } from "./../store/ducks/user/actionCreators";
 import { selectIsAdmin, selectCanEdit } from "./../store/ducks/user/selectors";
-import { AddUserModal } from "./addUserModal";
-import { fetchFarm } from "../api/authApi";
+import { AddUserModal } from "./AddUserModal";
 
 export const useSideMenuStyles = makeStyles({
   sideMenuWrapper: {},
@@ -55,9 +54,6 @@ export const SideMenu = () => {
     dispatch(fetchLogout());
   };
 
-  const handleFetchFarm = () => {
-    fetchFarm();
-  };
 
   return (
     <Grid md={2} className={classes.sideMenuWrapper} item>
@@ -82,9 +78,6 @@ export const SideMenu = () => {
             Выйти
           </ListItem>
 
-          <ListItem button onClick={handleFetchFarm}>
-            Получить список лекарств
-          </ListItem>
         </List>
       </Paper>
       <AddTerminalModal
